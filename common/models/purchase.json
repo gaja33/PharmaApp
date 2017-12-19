@@ -1,0 +1,41 @@
+{
+    "name": "purchase",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "supplier": {
+            "type": "string"
+        },
+        "invoiceNumber": {
+            "type": "number"
+        },
+        "invoiceDate": {
+            "type": "date"
+        },
+        "subTotal": {
+            "type": "string"
+        },
+        "discount": {
+            "type": "number"
+        },
+        "total": {
+            "type": "number"
+        },
+        "prevBalance": {
+            "type": "number"
+        },
+        "grandTotal": {
+            "type": "number"
+        },
+        "paid": {
+            "type": "number"
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+}

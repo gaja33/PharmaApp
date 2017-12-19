@@ -1,0 +1,68 @@
+{
+	"name": "medicine",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"purchaseId": {
+			"type": "number"
+		},
+		"medicineName": {
+			"type": "string"
+		},
+		"dosage": {
+			"type": "string"
+		},
+		"quantity": {
+			"type": "number"
+		},
+		"quantityInStrips": {
+			"type": "number"
+		},
+		"expDate": {
+			"type": "date"
+		},
+		"manDate": {
+			"type": "date"
+		},
+		"mrp": {
+			"type": "number"
+		},
+		"buyPrice": {
+			"type": "number"
+		},
+		"selPrice": {
+			"type": "number"
+		},
+		"pricePerUnit": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		},
+		"manufacturer": {
+			"type": "string"
+		},
+		"description": {
+			"type": "string"
+		},
+		"batch": {
+			"type": "string"
+		},
+		"gst": {
+			"type": "number"
+		},
+		"discount": {
+			"type": "number"
+		},
+		"category": {
+			"type": "string"
+		}
+	},
+	"validations": [],
+	"relations": {},
+	"acls": [],
+	"methods": {}
+}

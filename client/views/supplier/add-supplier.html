@@ -1,0 +1,43 @@
+<div class="box box-primary">
+	<div class="box-header with-border">
+		<h3 class="box-title">{{headerName}} Supplier</h3>
+	</div>
+	<!-- /.box-header -->
+	<div class="box-body">
+		<br>
+		<form name="Supplier">
+			<div class="form-group">
+				<label for="suppliername">Supplier Name</label>
+				<input type="text" class="form-control col-sm-3" id="suppliername" ng-model="supplier.supplierName">
+			</div>
+			<div class="form-group">
+				<label for="contactnumber">Conatct Number</label>
+				<input type="text" class="form-control col-sm-3" id="contactnumber" ng-model="supplier.contactNumber">
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="text" class="form-control col-sm-3" id="email" ng-model="supplier.email">
+			</div>
+			<div class="form-group">
+				<label for="address">Address</label>
+				<input type="text" class="form-control col-sm-3" id="address" ng-model="supplier.address">
+			</div>
+			<div class="form-group">
+				<label for="dlno">DL No.</label>
+				<input type="text" class="form-control col-sm-3" id="dlno" ng-model="supplier.dlNumber">
+			</div>
+			<div class="form-group">
+				<label for="gstin">GSTIN No.</label>
+				<input type="text" class="form-control col-sm-3" id="gstin" ng-model="supplier.gstin">
+			</div>
+			<br/>
+			<br/>
+		</form>
+	</div>
+	<!-- /.box-body -->
+	<div class="box-footer">
+		<button type="submit" class="btn btn-success" ng-click="supplierSave(supplier)" ng-show="Add">Save</button>
+		<button type="submit" class="btn btn-success" ng-click="supplierUpdate(supplier)" ng-show="Update">Update</button>
+		<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

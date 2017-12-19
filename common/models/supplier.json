@@ -1,0 +1,41 @@
+{
+    "name": "supplier",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "supplierName": {
+            "type": "string"
+        },
+        "contactNumber": {
+            "type": "number",
+            "postgresql": {
+                "dataType": "bigint"
+            }
+        },
+        "email": {
+            "type": "string"
+        },
+        "address": {
+            "type": "string"
+        },
+        "dlNumber": {
+            "type": "number",
+            "postgresql": {
+                "dataType": "bigint"
+            }
+        },
+        "gstin": {
+            "type": "number",
+            "postgresql": {
+                "dataType": "bigint"
+            }
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+}

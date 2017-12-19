@@ -1,0 +1,70 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "postgres",
+    "acls": [
+      {
+        "principalType": "ROLE",
+        "principalId": "$everyone",
+        "permission": "ALLOW",
+        "accessType": "READ"
+      }
+    ]
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "CategoryName": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "supplier": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "customer": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "medicine": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "purchase": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "sale": {
+    "dataSource": "postgres",
+    "public": true
+  }
+}

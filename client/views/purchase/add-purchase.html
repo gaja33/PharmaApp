@@ -1,0 +1,364 @@
+<style>
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px white inset;
+    }
+
+</style>
+
+<h2 style="margin:0;">Add Purchase</h2>
+<br>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Invoice Info</h3>
+                <!--<div class="box-tools pull-right">
+					<a href="/#/add-category" class="btn btn-primary btn-sm">Add Category</a>
+				</div>-->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="invoicenumber">Invoice Number</label>
+                    <input type="text" class="form-control" id="invoicenumber" ng-model="purchase.invoiceNumber">
+                </div>
+                <div class="form-group">
+                    <label for="invoicedate">Invoice Date</label>
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="purchase.invoiceDate" is-open="InvDatePopup.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" ng-click="openInvDate()" required/>
+                        <span class="input-group-btn">
+                    	<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+                		</span>
+                    </p>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Supplier Info</h3>
+                <!--<div class="box-tools pull-right">
+					<a href="/#/add-category" class="btn btn-primary btn-sm">Add Category</a>
+				</div>-->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="supplier">Supplier Name</label>
+                    <select class="form-control" id="category" ng-model="purchase.supplier" ng-change="getPrevBalance(purchase.supplier)">
+                        <option value="{{supplierName.supplierName}}" ng-repeat="supplierName in supplierNames">{{supplierName.supplierName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="supplier" style="font-size: 20px;">Balance</label>
+                    <div style="text-align: center;font-size: 20px;">Rs. {{preBalance}} <span class="fa fa-smile-o" ng-if="preBalance == 0"></span>
+                    <img src="images/sad.png" style="width:25px;height:auto;"  ng-if="preBalance != 0" />
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-sm-4">
+
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Medicine Info</h3>
+                <!--<div class="box-tools pull-right">
+					<a href="/#/add-category" class="btn btn-primary btn-sm">Add Category</a>
+				</div>-->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <form name="Medicine1">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="medicinename">Medicine Name</label>
+                                <input type="text" name="medicinename" class="form-control" id="medicinename" ng-model="medicine.medicineName">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select class="form-control" id="category" ng-model="medicine.category">
+                                    <option value="{{categoryName.CategoryName}}" ng-repeat="categoryName in categoryNames">{{categoryName.CategoryName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="manufacturer">Manufacturer</label>
+                                <input type="text" class="form-control" id="manufacturer" ng-model="medicine.manufacturer">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="dosage">Dosage</label>
+                                <input type="text" class="form-control" id="dosage" ng-model="medicine.dosage">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="quantity">Quantity</label>
+                                <input type="number" class="form-control" id="quantity" ng-model="medicine.quantity">
+                            </div>
+                        </div>
+						<div class="col-sm-4" ng-if="medicine.category == 'Tablet' || medicine.category == 'tablet'">
+                            <div class="form-group">
+                                <label for="quantityInStrips">Quantity(In strips)</label>
+                                <input type="number" class="form-control" id="quantityInStrips" ng-model="medicine.quantityInStrips">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="batch">Batch</label>
+                                <input type="text" class="form-control" id="batch" ng-model="medicine.batch">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="desc">Description</label>
+                                <input type="text" class="form-control" id="desc" ng-model="medicine.description">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="manufactureDate">Manufacture Date</label>
+                                <!--<input type="text" class="form-control" id="manufactureDate" ng-model="medicine.manDate">-->
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{formatman}}" ng-model="medicine.manDate" is-open="ManDatePopup.opened" datepicker-options="dateOptionsMan" close-text="Close" alt-input-formats="altInputFormats" ng-click="openManDate()" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="expDate">Expire Date</label>
+                                <!--<input type="text" class="form-control" id="expDate" ng-model="medicine.expDate">-->
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{formatman}}" ng-model="medicine.expDate" is-open="ExpDatePopup.opened" datepicker-options="dateOptionsMan" close-text="Close" alt-input-formats="altInputFormats" ng-click="openExpDate()" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="mrp">MRP</label>
+                                <input type="number" class="form-control" id="mrp" ng-model="medicine.mrp">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="buyPrice">Buying Price</label>
+                                <input type="number" class="form-control" id="buyPrice" ng-model="medicine.buyPrice">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="selPrice">Selling Price</label>
+                                <input type="number" class="form-control" id="selPrice" ng-model="medicine.selPrice">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="vat">GST(%)</label>
+                                <input type="number" class="form-control" id="vat" ng-model="medicine.gst">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="disc">Discount(%)</label>
+                                <input type="number" class="form-control" id="disc" ng-model="medicine.discount">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-primary btn-flat" ng-click="addMedicines(medicine)">Add</button>
+                            <button type="button" class="btn btn-default btn-flat" ng-click="resetMedicines()">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Medicine List</h3>
+                <!--<div class="box-tools pull-right">
+					<a href="/#/add-category" class="btn btn-primary btn-sm">Add Category</a>
+				</div>-->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Medicine Name</th>
+                                <th>Category</th>
+                                <th>Dosage</th>
+                                <th>Quantity</th>
+                                <th>MRP</th>
+                                <th>Buy Price</th>
+                                <th>Sell Price</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="medList in medArray track by $index">
+                                <td>{{medList.medicineName}}</td>
+                                <td>{{medList.category}}</td>
+                                <td>{{medList.dosage}}</td>
+                                <td>{{medList.quantity}}</td>
+                                <td>{{medList.mrp}}</td>
+                                <td>{{medList.buyPrice}}</td>
+                                <td>{{medList.selPrice}}</td>
+                                <td>{{medList.total}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-default btn-xs" ng-click="deleteMedData($index)"><span class="glyphicon glyphicon-trash"></span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Amount Info</h3>
+                <!--<div class="box-tools pull-right">
+					<a href="/#/add-category" class="btn btn-primary btn-sm">Add Category</a>
+				</div>-->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Sub Total</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" placeholder="Sub TotaL" ng-model="purchase.subTotal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Discount</label>
+
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" placeholder="Discount" ng-model="purchase.discount" ng-change="calculateTotalDiscount(purchase.discount,purchase.subTotal,preBalance)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Total</label>
+
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" placeholder="Total" ng-model="purchase.total">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Previous Balance</label>
+
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" placeholder="Previous Balance" ng-model="preBalance">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Grand Total</label>
+
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" placeholder="Grand Total" ng-model="purchase.grandTotal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Total Paid</label>
+
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" placeholder="Total Paid" ng-model="purchase.paid" ng-change="calculateBalance(purchase.paid,purchase.grandTotal)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Balance</label>
+
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" placeholder="Balance" ng-model="purchase.prevBalance">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left:15px;">
+                        <button type="button" class="btn btn-success btn-flat" ng-click="purchaseSave(purchase,medArray)">Save</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+
+<!--<form name="Purchase">
+	<div class="form-group">
+		<label for="supplier">Supplier</label>
+		<select class="form-control col-sm-3" id="category" ng-model="purchase.supplier">
+		<option value="{{supplierName.supplierName}}" ng-repeat="supplierName in supplierNames">{{supplierName.supplierName}}</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="invoicenumber">Invoice Number</label>
+		<input type="text" class="form-control col-sm-3" id="invoicenumber" ng-model="purchase.invoiceNumber">
+	</div>
+	<div class="form-group">
+		<label for="invoicedate">Invoice Date</label>
+		<input type="text" class="form-control col-sm-3" id="invoicedate" ng-model="purchase.invoiceDate">
+	</div>
+	<div class="form-group">
+		<label for="manufacturer">Manufacturer</label>
+		<input type="text" class="form-control col-sm-3" id="manufacturer" ng-model="purchase.manufacturer">
+	</div>
+	<div class="form-group">
+		<label for="quantity">Quantity</label>
+		<input type="text" class="form-control col-sm-3" id="quantity" ng-model="purchase.quantity">
+	</div>
+	<div class="form-group">
+		<label for="mrp">MRP</label>
+		<input type="text" class="form-control col-sm-3" id="mrp" ng-model="purchase.mrp">
+	</div>
+	<div class="form-group">
+		<label for="rate">Rate</label>
+		<input type="text" class="form-control col-sm-3" id="rate" ng-model="purchase.rate">
+	</div>
+	<div class="form-group">
+		<label for="netPrice">Net Price</label>
+		<input type="text" class="form-control col-sm-3" id="netPrice" ng-model="purchase.netPrice">
+	</div>
+	<div class="form-group">
+		<label for="vat">VAT(%)</label>
+		<input type="text" class="form-control col-sm-3" id="vat" ng-model="purchase.vat">
+	</div>
+	<div class="form-group">
+		<label for="disc">Discount</label>
+		<input type="text" class="form-control col-sm-3" id="disc" ng-model="purchase.discount">
+	</div>
+	<br/>
+	<br/>
+	<button type="submit" class="btn btn-success" ng-click="purchaseSave(purchase)" ng-show="Add">Save</button>
+	<button type="submit" class="btn btn-success" ng-click="purchaseUpdate(purchase)" ng-show="Update">Update</button>
+	<button type="button" class="btn btn-default">Cancel</button>
+</form>-->

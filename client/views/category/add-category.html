@@ -1,0 +1,27 @@
+<div class="alert alert-success" ng-if="showAlert">
+    {{message}}
+</div>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">{{headerName}} Category</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <br>
+        <form name="Category">
+            <div class="form-group">
+                <label for="addCategory">Category Name</label>
+                <input type="text" class="form-control col-sm-3" id="addCategory" ng-model="category.CategoryName">
+            </div>
+            <br/>
+            <br/>
+            <br/>
+        </form>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        <button type="submit" class="btn btn-success" ng-click="categorySave(category)" ng-show="Add">Save</button>
+        <button type="submit" class="btn btn-success" ng-click="categoryUpdate(category)" ng-show="Update">Update</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

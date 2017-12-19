@@ -1,0 +1,79 @@
+<h1>Add Medicine</h1>
+
+<form name="Medicine">
+	<div class="form-group">
+		<label for="medicinename">Medicine Name</label>
+		<input type="text" class="form-control col-sm-3" id="medicinename" ng-model="medicine.medicineName">
+	</div>
+	<div class="form-group">
+		<label for="category">Category</label>
+		<select class="form-control col-sm-3" id="category" ng-model="medicine.category">
+		<option value="{{categoryName.CategoryName}}" ng-repeat="categoryName in categoryNames">{{categoryName.CategoryName}}</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="dosage">Dosage</label>
+		<input type="text" class="form-control col-sm-3" id="dosage" ng-model="medicine.dosage">
+	</div>
+	<div class="form-group">
+		<label for="quantity">Quantity</label>
+		<input type="text" class="form-control col-sm-3" id="quantity" ng-model="medicine.quantity">
+	</div>
+	<div class="form-group">
+		<label for="batch">Batch</label>
+		<input type="text" class="form-control col-sm-3" id="batch" ng-model="medicine.batch">
+	</div>
+	<div class="form-group">
+		<label for="manufacturer">Manufacturer</label>
+		<input type="text" class="form-control col-sm-3" id="manufacturer" ng-model="medicine.manufacturer">
+	</div>
+	<div class="form-group">
+		<label for="desc">Description</label>
+		<input type="text" class="form-control col-sm-3" id="desc" ng-model="medicine.description">
+	</div>
+	<div class="form-group">
+		<label for="manufactureDate">Manufacture Date</label>
+		<!--<input type="text" class="form-control col-sm-3" id="manufactureDate" ng-model="medicine.manDate">-->
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="medicine.manDate" is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+	</div>
+	<div class="form-group">
+		<label for="expDate">Expire Date</label>
+		<!--<input type="text" class="form-control col-sm-3" id="expDate" ng-model="medicine.expDate">-->
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="medicine.expDate" is-open="popup2.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+	</div>
+	<div class="form-group">
+		<label for="mrp">MRP</label>
+		<input type="text" class="form-control col-sm-3" id="mrp" ng-model="medicine.mrp">
+	</div>
+	<div class="form-group">
+		<label for="buyPrice">Buying Price</label>
+		<input type="text" class="form-control col-sm-3" id="buyPrice" ng-model="medicine.buyPrice">
+	</div>
+	<div class="form-group">
+		<label for="selPrice">Selling Price</label>
+		<input type="text" class="form-control col-sm-3" id="selPrice" ng-model="medicine.selPrice">
+	</div>
+	<div class="form-group">
+		<label for="vat">VAT(%)</label>
+		<input type="text" class="form-control col-sm-3" id="vat" ng-model="medicine.vat">
+	</div>
+	<div class="form-group">
+		<label for="disc">Discount</label>
+		<input type="text" class="form-control col-sm-3" id="disc" ng-model="medicine.discount">
+	</div>
+	<br/>
+	<br/>
+	<button type="submit" class="btn btn-success" ng-click="medicineSave(medicine)" ng-show="Add">Save</button>
+	<button type="submit" class="btn btn-success" ng-click="medicineUpdate(medicine)" ng-show="Update">Update</button>
+	<button type="button" class="btn btn-default">Cancel</button>
+</form>
