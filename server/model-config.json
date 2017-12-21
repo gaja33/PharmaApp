@@ -66,5 +66,17 @@
   "sale": {
     "dataSource": "postgres",
     "public": true
+  },
+  "PurchaseDetails": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "SaleDetails": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "Stock": {
+    "dataSource": "postgres",
+    "public": true
   }
 }

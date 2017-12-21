@@ -1,37 +1,43 @@
 {
-  "name": "medicine",
+  "name": "SaleDetails",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "supplierId": {
+    "saleId": {
       "type": "number"
     },
-    "categoryId": {
+    "medicineId": {
       "type": "number"
     },
     "medicineName": {
-      "type": "string"
+      "type": "number"
     },
-    "dosage": {
-      "type": "string"
+    "quantity": {
+      "type": "number"
     },
-    "manufacturer": {
-      "type": "string"
+    "mrp": {
+      "type": "number"
     },
-    "description": {
-      "type": "string"
+    "supplierPrice": {
+      "type": "number"
     },
-    "gst": {
+    "totalPrice": {
       "type": "number"
     },
     "discount": {
       "type": "number"
     },
-    "categoryName": {
-      "type": "string"
+    "gst": {
+      "type": "number"
+    },
+    "paid": {
+      "type": "number"
+    },
+    "balance": {
+      "type": "number"
     }
   },
   "validations": [],

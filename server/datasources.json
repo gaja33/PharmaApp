@@ -7,7 +7,7 @@
     "host": "127.0.0.1",
     "port": 5432,
     "url": "",
-    "database": "medical",
+    "database": "pharma",
     "password": "postgres",
     "name": "postgres",
     "user": "postgres",

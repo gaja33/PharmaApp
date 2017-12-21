@@ -1,41 +1,32 @@
 {
-    "name": "purchase",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "purchase",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "supplierId": {
+      "type": "number"
     },
-    "properties": {
-        "supplier": {
-            "type": "string"
-        },
-        "invoiceNumber": {
-            "type": "number"
-        },
-        "invoiceDate": {
-            "type": "date"
-        },
-        "subTotal": {
-            "type": "string"
-        },
-        "discount": {
-            "type": "number"
-        },
-        "total": {
-            "type": "number"
-        },
-        "prevBalance": {
-            "type": "number"
-        },
-        "grandTotal": {
-            "type": "number"
-        },
-        "paid": {
-            "type": "number"
-        }
+    "supplierName": {
+      "type": "string"
     },
-    "validations": [],
-    "relations": {},
-    "acls": [],
-    "methods": {}
+    "invoiceNumber": {
+      "type": "number"
+    },
+    "invoiceDate": {
+      "type": "date"
+    },
+    "purchaseDate": {
+      "type": "date"
+    },
+    "grandTotal": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
 }

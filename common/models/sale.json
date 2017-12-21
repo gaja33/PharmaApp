@@ -6,30 +6,21 @@
     "validateUpsert": true
   },
   "properties": {
-    "medicineName": {
+    "customerName": {
       "type": "string"
     },
-    "currQuantity": {
+    "customerId": {
       "type": "number"
     },
-    "dosage": {
-      "type": "string"
-    },
-    "selPrice": {
-      "type": "number"
-    },
-    "amount": {
-      "type": "number"
-    },
-    "medicineid": {
-      "type": "number"
-    },
-    "invoice": {
+    "invoiceNumber": {
       "type": "number"
     },
     "invoiceDate": {
       "type": "date"
-    }       
+    },
+    "totalAmount": {
+      "type": "number"
+    }
   },
   "validations": [],
   "relations": {},

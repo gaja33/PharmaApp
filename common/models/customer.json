@@ -1,32 +1,32 @@
 {
-	"name": "customer",
-	"base": "PersistedModel",
-	"idInjection": true,
-	"options": {
-		"validateUpsert": true
-	},
-	"properties": {
-		"customerName": {
-			"type": "string"
-		},
-		"gender": {
-			"type": "string"
-		},
-		"contactNumber": {
-			"type": "number",
-			"postgresql": {
-				"dataType": "bigint"
-			}
-		},
-		"email": {
-			"type": "string"
-		},
-		"address": {
-			"type": "string"
-		}
-	},
-	"validations": [],
-	"relations": {},
-	"acls": [],
-	"methods": {}
+  "name": "customer",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "customerName": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "contactNumber": {
+      "type": "number",
+      "postgresql": {
+        "dataType": "bigint"
+      }
+    },
+    "email": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
 }
