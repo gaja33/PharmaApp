@@ -1,8 +1,12 @@
-<h2 style="margin:0;">View Stocks</h2>
+<h2 style="margin:0;">View Medicines</h2>
 <br>
 <div class="box box-primary">
 	<div class="box-header with-border">
-		<h3 class="box-title">Stock List</h3>
+		<h3 class="box-title">Medicine List</h3>
+		<div class="box-tools pull-right">
+			<a href="/#/add-medicine" class="btn btn-primary btn-sm">Add Medicine</a>
+		</div>
+		
 	</div>
 	<!-- /.box-header -->
 	<div class="box-body">
@@ -11,32 +15,18 @@
 				<th>Medicine Name</th>
 				<th>Category</th>
 				<th>Dosage</th>
-				<th>Quantity</th>
-				<th>Batch</th>
 				<th>Manufacturer</th>
-				<th>Desc</th>
-				<th>Manuf Date</th>
-				<th>Exp Date</th>
-				<th>MRP</th>
-				<th>Buy Price</th>
-				<th>Sell Price</th>
+				<th>Description</th>
 				<th>GST%</th>
 				<th>Discount</th>
 			</thead>
 			<tbody>
 				<tr ng-repeat="medicine in medicines">
 					<td>{{medicine.medicineName}}</td>
-					<td>{{medicine.category}}</td>
+					<td>{{medicine.categoryName}}</td>
 					<td>{{medicine.dosage}}</td>
-					<td>{{medicine.quantity}}</td>
-					<td>{{medicine.batch}}</td>
 					<td>{{medicine.manufacturer}}</td>
 					<td>{{medicine.description}}</td>
-					<td>{{medicine.manDate|date:'dd/MM/yyyy'}}</td>
-					<td>{{medicine.expDate|date:'dd/MM/yyyy'}}</td>
-					<td>{{medicine.mrp}}</td>
-					<td>{{medicine.buyPrice}}</td>
-					<td>{{medicine.selPrice}}</td>
 					<td>{{medicine.gst}}</td>
 					<td>{{medicine.discount}}</td>
 				</tr>

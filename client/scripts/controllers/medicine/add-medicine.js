@@ -8,14 +8,56 @@
  * Controller of the jewelleryApp
  */
 angular.module('kamakshiJewellersApp')
-    .controller('AddMedicineCtrl', function ($scope, $rootScope, $http, $location, $timeout, $routeParams) {
+	.controller('AddMedicineCtrl', function ($scope, $rootScope, $http, $location, $timeout, $routeParams) {
 
-        $scope.Update = false;
-        $scope.Add = true;
+		$scope.Update = false;
+		$scope.Add = true;
 
-        $scope.medicine = {};
+		$scope.medicine = {};
 
-        $scope.dateOptions = {
+
+		$http.get('/api/CategoryNames').then(function (resp) {
+			console.log("resp", resp)
+			$scope.categoryNames = resp.data;
+		})
+
+		$http.get('/api/suppliers').then(function (resp) {
+			console.log("resp", resp)
+			$scope.suppliers = resp.data;
+		})
+
+		$scope.medicineSave = function (obj) {
+			//console.log("obj", obj);
+
+			var medObj = obj;
+
+			$http.get('/api/CategoryNames/', medObj.categoryId).then(function (resp) {
+				console.log("categoryName", resp.data[0].CategoryName);
+				medObj.categoryName = resp.data[0].CategoryName;
+			})
+			console.log("medObj", medObj);
+
+			$timeout(function () {
+				$http.post('/api/medicines', medObj).then(function (resp) {
+					console.log("resp", resp)
+					if (resp.status == 200) {
+						$scope.medicine = {};
+						$scope.Medicine.$setPristine();
+						$scope.Medicine.$setUntouched();
+
+						$timeout(function () {
+							$location.path('/view-medicine')
+						}, 500)
+
+					}
+				})
+			}, 500)
+
+
+
+		}
+
+		/*$scope.dateOptions = {
             formatYear: 'yy',
             maxDate: new Date(2020, 5, 22),
             minDate: new Date(),
@@ -40,29 +82,9 @@ angular.module('kamakshiJewellersApp')
 
         $scope.open2 = function () {
             $scope.popup2.opened = true;
-        };
-
-        $http.get('/api/CategoryNames').then(function (resp) {
-            console.log("resp", resp)
-            $scope.categoryNames = resp.data;
-        })
-
-        $scope.medicineSave = function (obj) {
-            console.log("obj", obj)
-            $http.post('/api/medicines', obj).then(function (resp) {
-                console.log("resp", resp)
-                if (resp.status == 200) {
-                    $scope.medicine = {};
-                    $scope.Medicine.$setPristine();
-                    $scope.Medicine.$setUntouched();
-
-                    $timeout(function () {
-                        $location.path('/view-medicine')
-                    }, 500)
-
-                }
-            })
-        }
+        };*/
 
 
-    });
+
+
+	});
