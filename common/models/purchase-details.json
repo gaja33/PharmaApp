@@ -18,6 +18,12 @@
     "quantity": {
       "type": "number"
     },
+    "batch": {
+      "type": "number"
+    },
+    "expDate": {
+      "type": "number"
+    },
     "mrp": {
       "type": "number"
     },
