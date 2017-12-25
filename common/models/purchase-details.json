@@ -1,56 +1,83 @@
 {
-  "name": "PurchaseDetails",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "purchaseId": {
-      "type": "number"
-    },
-    "medicineId": {
-      "type": "number"
-    },
-    "medicineName": {
-      "type": "string"
-    },
-    "quantity": {
-      "type": "number"
-    },
-    "batch": {
-      "type": "number"
-    },
-    "expDate": {
-      "type": "number"
-    },
-    "mrp": {
-      "type": "number"
-    },
-    "supplierPrice": {
-      "type": "number"
-    },
-    "subTotal": {
-      "type": "number"
-    },
-    "discount": {
-      "type": "number"
-    },
-    "totalAmount": {
-      "type": "number"
-    },
-    "prevBalance": {
-      "type": "number"
-    },
-    "grandTotal": {
-      "type": "number"
-    },
-    "paid": {
-      "type": "number"
-    }
-  },
-  "validations": [],
-  "relations": {},
-  "acls": [],
-  "methods": {}
+	"name": "PurchaseDetails",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"purchaseId": {
+			"type": "number"
+		},
+		"medicineId": {
+			"type": "number"
+		},
+		"medicineName": {
+			"type": "string"
+		},
+		"quantity": {
+			"type": "number"
+		},
+		"quantityInStrips": {
+			"type": "number"
+		},
+		"batch": {
+			"type": "string"
+		},
+		"expDate": {
+			"type": "date"
+		},
+		"mrp": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		},
+		"supplierPrice": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		},
+		"pricePerUnit": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		},
+		"subTotal": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		},
+		"totalAmount": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		},
+		"prevBalance": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		},
+		"grandTotal": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		},
+		"paid": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		}
+	},
+	"validations": [],
+	"relations": {},
+	"acls": [],
+	"methods": {}
 }

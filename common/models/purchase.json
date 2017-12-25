@@ -1,32 +1,35 @@
 {
-  "name": "purchase",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "supplierId": {
-      "type": "number"
-    },
-    "supplierName": {
-      "type": "string"
-    },
-    "invoiceNumber": {
-      "type": "number"
-    },
-    "invoiceDate": {
-      "type": "date"
-    },
-    "purchaseDate": {
-      "type": "date"
-    },
-    "grandTotal": {
-      "type": "number"
-    }
-  },
-  "validations": [],
-  "relations": {},
-  "acls": [],
-  "methods": {}
+	"name": "purchase",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"supplierId": {
+			"type": "number"
+		},
+		"supplierName": {
+			"type": "string"
+		},
+		"invoiceNumber": {
+			"type": "string"
+		},
+		"invoiceDate": {
+			"type": "date"
+		},
+		"purchaseDate": {
+			"type": "date"
+		},
+		"grandTotal": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		}
+	},
+	"validations": [],
+	"relations": {},
+	"acls": [],
+	"methods": {}
 }

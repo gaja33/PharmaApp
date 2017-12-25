@@ -1,216 +1,220 @@
 <style>
-    input:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0 30px white inset;
-    }
-    
-    .table-bordered {
-        border: 1px solid #ddd;
-    }
-    
-    .table-bordered>thead>tr>th,
-    .table-bordered>tbody>tr>th,
-    .table-bordered>tfoot>tr>th,
-    .table-bordered>thead>tr>td,
-    .table-bordered>tbody>tr>td,
-    .table-bordered>tfoot>tr>td {
-        border: 1px solid #ddd;
-    }
-    
-    .table-bordered>tbody>tr>td,
-    .table-bordered>tbody>tr>th,
-    .table-bordered>tfoot>tr>td,
-    .table-bordered>tfoot>tr>th,
-    .table-bordered>thead>tr>td,
-    .table-bordered>thead>tr>th {
-        border: 1px solid #ddd;
-    }
+	input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 30px white inset;
+	}
+
+	.table-bordered {
+		border: 1px solid #ddd;
+	}
+
+	.table-bordered>thead>tr>th,
+	.table-bordered>tbody>tr>th,
+	.table-bordered>tfoot>tr>th,
+	.table-bordered>thead>tr>td,
+	.table-bordered>tbody>tr>td,
+	.table-bordered>tfoot>tr>td {
+		border: 1px solid #ddd;
+	}
+
+	.table-bordered>tbody>tr>td,
+	.table-bordered>tbody>tr>th,
+	.table-bordered>tfoot>tr>td,
+	.table-bordered>tfoot>tr>th,
+	.table-bordered>thead>tr>td,
+	.table-bordered>thead>tr>th {
+		border: 1px solid #ddd;
+	}
 
 </style>
 
 <h2 style="margin:0;">Add Purchase</h2>
 <br>
 <div class="row">
-    <div class="col-sm-12">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Add Purchase</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <form name="Purchase">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="supplier">Supplier Name</label>
-                                <select class="form-control" id="category" ng-model="purchase.supplierId" ng-change="getMedicines(purchase.supplierId)">
+	<div class="col-sm-12">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">Add Purchase</h3>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+				<form name="Purchase">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="supplier">Supplier Name</label>
+								<select class="form-control" id="category" ng-model="purchase.supplierId" ng-change="getMedicines(purchase.supplierId)">
                                     <option value="{{supplierName.id}}" ng-repeat="supplierName in supplierNames">{{supplierName.supplierName}}</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="invoicenumber">Invoice Number</label>
-                                <input type="text" class="form-control" id="invoicenumber" ng-model="purchase.invoiceNumber">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="invoicedate">Invoice Date</label>
-                                <p class="input-group">
-                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="purchase.invoiceDate" is-open="InvDatePopup.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" ng-click="openInvDate()" required/>
-                                    <span class="input-group-btn">
+								<input type="hidden" ng-model="purchase.supplierName"/>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="invoicenumber">Invoice Number</label>
+								<input type="text" class="form-control" id="invoicenumber" ng-model="purchase.invoiceNumber">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="invoicedate">Invoice Date</label>
+								<p class="input-group">
+									<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="purchase.invoiceDate" is-open="InvDatePopup.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" ng-click="openInvDate()" required/>
+									<span class="input-group-btn">
                     	               <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
                 		            </span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="invoicedate">Purchase Date</label>
-                                <p class="input-group">
-                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="purchase.purchaseDate" is-open="PurDatePopup.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" ng-click="openPurDate()" required/>
-                                    <span class="input-group-btn">
+								</p>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="invoicedate">Purchase Date</label>
+								<p class="input-group">
+									<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="purchase.purchaseDate" is-open="PurDatePopup.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" ng-click="openPurDate()" required/>
+									<span class="input-group-btn">
                     	               <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
                 		            </span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <form name="Medicine">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Medicine Name</th>
-                                    <th>Quantity</th>
-                                    <th>Batch</th>
-                                    <th>Exp Date</th>
-                                    <th>MRP</th>
-                                    <th>Supplier Price</th>
-                                    <th>Total</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="medicineDetails in medicineDetailsArr track by $index">
-                                    <td>
-                                        <select class="form-control" ng-model="medicineDetails.medicineId" ng-change="getMedicineDetails(medicineDetails.medicineId)">
+								</p>
+							</div>
+						</div>
+					</div>
+				</form>
+				<form name="Medicine">
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped table-hover">
+							<thead>
+								<tr>
+									<th>Medicine Name</th>
+									<th>Quantity</th>
+									<th>Batch</th>
+									<th>Exp Date</th>
+									<th>MRP</th>
+									<th>Supplier Price</th>
+									<th>Dis(%)</th>
+									<th>GST(%)</th>
+									<th>Total</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="medicineDetails in medicineDetailsArr track by $index">
+									<td>
+										<select class="form-control" ng-model="medicineDetails.medicineId" ng-change="getMedicineDetails(medicineDetails.medicineId,medicineDetails)">
+											<option value="" ng-disabled="purchase.supplierId">Please Select Supplier</option>
                                             <option value="{{medicine.id}}" ng-repeat="medicine in medicines">{{medicine.medicineName}},{{medicine.dosage}}</option>
                                         </select>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" ng-model="medicineDetails.quantity" />
-                                        <input type="number" class="form-control" ng-model="medicineDetails.quantityInStrips" ng-if="showIfTablet" />
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" ng-model="medicineDetails.batch" />
-                                    </td>
-                                    <td>
-                                        <p class="input-group">
-                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="medicineDetails.expDate" is-open="ExpDatePopup.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" ng-click="openExpDate()" required/>
-                                            <span class="input-group-btn">
+										<input type="hidden" ng-model="medicineDetails.medicineName"/>
+									</td>
+									<td>
+										<input type="number" class="form-control" ng-model="medicineDetails.quantity" />
+										<div class="input-group" ng-if="showIfTablet">
+											<input type="number" class="form-control" ng-model="medicineDetails.quantityInStrips" />
+											<span class="input-group-addon">In Strips</span>
+										</div>
+										
+									</td>
+									<td>
+										<input type="text" class="form-control" ng-model="medicineDetails.batch" />
+									</td>
+									<td>
+										<p class="input-group">
+											<input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy" ng-model="medicineDetails.expDate" is-open="medicineDetails.opened" datepicker-options="dateOptionsExp" close-text="Close" alt-input-formats="altInputFormats" ng-click="openExpDate($event,medicineDetails)" required/>
+											<span class="input-group-btn">
                     	                       <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
                 		                    </span>
-                                        </p>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" ng-model="medicineDetails.mrp" />
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" ng-model="medicineDetails.supplierPrice" />
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" ng-model="medicineDetails.totalAmount" />
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger btn-sm" ng-click="removeItem($index)"><i class="glyphicon glyphicon-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button type="button" class="btn btn-info btn-sm" ng-click="addItem()">Add New Item</button>
-                                    </td>
-                                    <td colspan="4"></td>
-                                    <td style="text-align:right;font-weight:bold;vertical-align:middle;">
-                                        <span>Sub Total:</span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" placeholder="Sub TotaL" ng-model="purchase.subTotal">
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5"></td>
-                                    <td style="text-align:right;font-weight:bold;vertical-align:middle;">
-                                        <span>Discount:</span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" placeholder="Discount" ng-model="purchase.discount" ng-change="calculateTotalDiscount(purchase.discount,purchase.subTotal,preBalance)">
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5"></td>
-                                    <td style="text-align:right;font-weight:bold;vertical-align:middle;">
-                                        <span>Total:</span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" placeholder="Total" ng-model="purchase.total">
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5"></td>
-                                    <td style="text-align:right;font-weight:bold;vertical-align:middle;">
-                                        <span>Previous Balance:</span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" placeholder="Previous Balance" ng-model="preBalance">
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5"></td>
-                                    <td style="text-align:right;font-weight:bold;vertical-align:middle;">
-                                        <span>Grand Total:</span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" placeholder="Grand Total" ng-model="purchase.grandTotal">
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5"></td>
-                                    <td style="text-align:right;font-weight:bold;vertical-align:middle;">
-                                        <span>Total Paid:</span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" placeholder="Total Paid" ng-model="purchase.paid" ng-change="calculateBalance(purchase.paid,purchase.grandTotal)">
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5"></td>
-                                    <td style="text-align:right;font-weight:bold;vertical-align:middle;">
-                                        <span>Balance:</span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" placeholder="Balance" ng-model="purchase.prevBalance">
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="form-group" style="margin-left:15px;">
-                        <button type="button" class="btn btn-success btn-flat" ng-click="purchaseSave(purchase,medicineDetailsArr)">Save</button>
-                    </div>
-                </form>
+										</p>
+									</td>
+									<td>
+										<input type="number" class="form-control" ng-model="medicineDetails.mrp" />
+									</td>
+									<td>
+										<input type="number" class="form-control" ng-model="medicineDetails.supplierPrice" ng-change="calculateIndTotal(medicineDetails.supplierPrice,medicineDetails)" />
+									</td>
+									<td>
+										<input type="number" class="form-control" ng-model="medicineDetails.discount" />
+									</td>
+									<td>
+										<input type="number" class="form-control" ng-model="medicineDetails.gst" />
+									</td>
+									<td>
+										<input type="number" class="form-control" ng-model="medicineDetails.totalAmount" />
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger btn-sm" ng-click="removeItem($index)"><i class="glyphicon glyphicon-trash"></i></button>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<button type="button" class="btn btn-info btn-sm" ng-click="addItem()">Add New Item</button>
+									</td>
+									<td colspan="6"></td>
+									<td style="text-align:right;font-weight:bold;vertical-align:middle;">
+										<span>Sub Total:</span>
+									</td>
+									<td>
+										<input type="number" class="form-control" placeholder="Sub TotaL" ng-model="purchaseDetails.subTotal">
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td colspan="7"></td>
+									<td style="text-align:right;font-weight:bold;vertical-align:middle;">
+										<span>Previous Balance:</span>
+									</td>
+									<td>
+										<input type="number" class="form-control" placeholder="Previous Balance" ng-model="purchaseDetails.preBalance">
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td colspan="7"></td>
+									<td style="text-align:right;font-weight:bold;vertical-align:middle;">
+										<span>Grand Total:</span>
+									</td>
+									<td>
+										<input type="number" class="form-control" placeholder="Grand Total" ng-model="purchaseDetails.grandTotal">
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td colspan="7"></td>
+									<td style="text-align:right;font-weight:bold;vertical-align:middle;">
+										<span>Total Paid:</span>
+									</td>
+									<td>
+										<input type="number" class="form-control" placeholder="Total Paid" ng-model="purchaseDetails.paid" ng-change="calculateBalance(purchaseDetails.paid,purchaseDetails.grandTotal)">
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td colspan="7"></td>
+									<td style="text-align:right;font-weight:bold;vertical-align:middle;">
+										<span>Balance:</span>
+									</td>
+									<td>
+										<input type="number" class="form-control" placeholder="Balance" ng-model="purchaseDetails.prevBalance">
+									</td>
+									<td></td>
+								</tr><tr>
+									<td colspan="7"></td>
+									<td style="text-align:right;font-weight:bold;vertical-align:middle;">
+										<span>Roundoff:</span>
+									</td>
+									<td>
+										<input type="number" class="form-control" placeholder="Roundoff" ng-model="roundoff">
+									</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="form-group" style="margin-left:15px;">
+						<button type="button" class="btn btn-success btn-flat" ng-click="purchaseSave(purchase,medicineDetailsArr,purchaseDetails)">Save</button>
+					</div>
+				</form>
 
 
-            </div>
-            <!-- /.box-body -->
-        </div>
-    </div>
+			</div>
+			<!-- /.box-body -->
+		</div>
+	</div>
 </div>
