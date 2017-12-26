@@ -19,7 +19,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'angularFileUpload',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'lbServices'
   ])
 	.config(function ($routeProvider, $locationProvider) {
 		$routeProvider

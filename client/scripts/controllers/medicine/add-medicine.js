@@ -8,83 +8,71 @@
  * Controller of the jewelleryApp
  */
 angular.module('kamakshiJewellersApp')
-	.controller('AddMedicineCtrl', function ($scope, $rootScope, $http, $location, $timeout, $routeParams) {
+    .controller('AddMedicineCtrl', function ($scope, $rootScope, $http, $location, $timeout, $routeParams, Medicine) {
 
-		$scope.Update = false;
-		$scope.Add = true;
+        $scope.Update = false;
+        $scope.Add = true;
 
-		$scope.medicine = {};
+        $scope.medicine = {};
 
 
-		$http.get('/api/CategoryNames').then(function (resp) {
-			console.log("resp", resp)
-			$scope.categoryNames = resp.data;
-		})
+        $http.get('/api/CategoryNames').then(function (resp) {
+            console.log("resp", resp)
+            $scope.categoryNames = resp.data;
+        })
 
-		$http.get('/api/suppliers').then(function (resp) {
-			console.log("resp", resp)
-			$scope.suppliers = resp.data;
-		})
-
-		$scope.medicineSave = function (obj) {
-			//console.log("obj", obj);
-
-			var medObj = obj;
-
-			$http.get('/api/CategoryNames/', medObj.categoryId).then(function (resp) {
-				console.log("categoryName", resp.data[0].CategoryName);
-				medObj.categoryName = resp.data[0].CategoryName;
-			})
-			console.log("medObj", medObj);
-
-			$timeout(function () {
-				$http.post('/api/medicines', medObj).then(function (resp) {
-					console.log("resp", resp)
-					if (resp.status == 200) {
-						$scope.medicine = {};
-						$scope.Medicine.$setPristine();
-						$scope.Medicine.$setUntouched();
-
-						$timeout(function () {
-							$location.path('/view-medicine')
-						}, 500)
-
-					}
-				})
-			}, 500)
+        $http.get('/api/suppliers').then(function (resp) {
+            console.log("resp", resp)
+            $scope.suppliers = resp.data;
+        })
 
 
 
-		}
+        $scope.medicineSave = function (obj) {
+            //console.log("obj", obj);
 
-		/*$scope.dateOptions = {
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
-            startingDay: 1
-        };
-
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
-        $scope.altInputFormats = ['M!/d!/yyyy'];
-
-        $scope.popup1 = {
-            opened: false
-        };
-
-        $scope.open1 = function () {
-            $scope.popup1.opened = true;
-        };
-    
-        $scope.popup2 = {
-            opened: false
-        };
-
-        $scope.open2 = function () {
-            $scope.popup2.opened = true;
-        };*/
+            var medObj = obj;
 
 
+            $http.get('/api/CategoryNames/' + medObj.categoryId).then(function (resp) {
+                console.log("categoryName", resp.data.CategoryName);
+                medObj.categoryName = resp.data.CategoryName;
+            }).catch(function (response) {
+                console.error('Error', response.status, response.data);
+            }).finally(function () {
+                $http.get('/api/medicines/?filter[where][and][0][medicineName]=' + medObj.medicineName + '&filter[where][and][1][dosage]=' + medObj.dosage + '&filter[where][and][2][categoryName]=' + medObj.categoryName).then(function (resp) {
+                    console.log("MedicineList", resp.data);
+                    if (resp.data.length != 0) {
+                        alert("Medicine Already Exists")
+                    } else {
+                        $http.post('/api/medicines', medObj).then(function (resp) {
+                            console.log("resp", resp)
+                            if (resp.status == 200) {
+                                var stockObj={};
+                                stockObj.medicineId = resp.data.id;
+                                stockObj.medicineName = resp.data.medicineName;
+                                stockObj.categoryId = resp.data.categoryId;
+                                stockObj.categoryName = resp.data.categoryName;
+                                stockObj.purchaseQuantity = 0;
+                                stockObj.saleQuantity = 0;
+                                $http.post('/api/Stocks', stockObj).then(function (resp) {
+                                    console.log("Stocks", resp)
+                                })
+                                $scope.medicine = {};
+                                $scope.Medicine.$setPristine();
+                                $scope.Medicine.$setUntouched();
 
+                                $timeout(function () {
+                                    $location.path('/view-medicine')
+                                }, 500)
 
-	});
+                            }
+                        })
+                    }
+                })
+            })
+            console.log("medObj", medObj);
+
+        }
+
+    });
