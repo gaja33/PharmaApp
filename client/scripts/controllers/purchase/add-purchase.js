@@ -85,11 +85,14 @@ angular.module('kamakshiJewellersApp')
 			console.log("id", id);
 			$http.get('/api/medicines?filter[where][supplierId]=' + id).then(function (resp) {
 				console.log("medicine", resp.data);
-				$scope.medicines = resp.data;
-			})
-			$http.get('/api/suppliers?filter[where][supplierId]=' + id).then(function (resp) {
-				console.log("medicine", resp.data);
-				$scope.purchase.supplierName = resp.data[0].supplierName;
+				$scope.medicinesArr = resp.data;
+			}).catch(function (response) {
+				console.error('Error', response.status, response.data);
+			}).finally(function () {
+				$http.get('/api/suppliers?filter[where][supplierId]=' + id).then(function (resp) {
+					console.log("suppliers", resp.data);
+					$scope.purchase.supplierName = resp.data[0].supplierName;
+				})
 			})
 		}
 		$scope.showIfTablet = false;
@@ -98,15 +101,16 @@ angular.module('kamakshiJewellersApp')
 			console.log("id", id);
 			$http.get('/api/medicines?filter[where][id]=' + id).then(function (resp) {
 				console.log("medicine", resp.data);
-				if (resp.data[0].categoryName == "tablet") {
-					$scope.showIfTablet = true;
-				} else {
-					$scope.showIfTablet = false;
+				if (resp.data.length != 0) {
+					if (resp.data[0].categoryName == "tablet" || resp.data[0].categoryName == "tablet") {
+						$scope.showIfTablet = true;
+					} else {
+						$scope.showIfTablet = false;
+					}
+					medDet.discount = resp.data[0].discount;
+					medDet.gst = resp.data[0].gst;
+					medDet.category = resp.data[0].categoryName;
 				}
-
-				medDet.discount = resp.data[0].discount;
-				medDet.gst = resp.data[0].gst;
-				medDet.category = resp.data[0].categoryName;
 			})
 		}
 
@@ -115,15 +119,18 @@ angular.module('kamakshiJewellersApp')
 		$scope.calculateIndTotal = function (supPrice, medDe) {
 			medDe.totalAmountAfterDiscount = (supPrice * medDe.quantity) - ((supPrice * medDe.quantity) * (medDe.discount / 100));
 			medDe.totalAmount = medDe.totalAmountAfterDiscount + ((medDe.totalAmountAfterDiscount) * (medDe.gst / 100));
+			medDe.totalAmount = parseFloat(medDe.totalAmount.toFixed(2));
 			//TotalAmount = medDe.totalAmount;
 
 			$scope.purchaseDetails.subTotal = 0;
 			for (var i = 0; i < $scope.medicineDetailsArr.length; i++) {
-				$scope.purchaseDetails.subTotal = $scope.purchaseDetails.subTotal + $scope.medicineDetailsArr[i].totalAmount;
-				$scope.purchaseDetails.subTotal = parseFloat($scope.purchaseDetails.subTotal);
+				$scope.purchaseDetails.subTotal = parseFloat($scope.purchaseDetails.subTotal.toFixed(2)) + parseFloat($scope.medicineDetailsArr[i].totalAmount.toFixed(2));
+				$scope.purchaseDetails.subTotal = parseFloat($scope.purchaseDetails.subTotal.toFixed(2));
 			}
 
-			$scope.purchaseDetails.grandTotal = $scope.purchaseDetails.preBalance + $scope.purchaseDetails.subTotal;
+			$scope.purchaseDetails.grandTotal = parseFloat($scope.purchaseDetails.preBalance.toFixed(2)) + parseFloat($scope.purchaseDetails.subTotal.toFixed(2));
+
+			$scope.purchaseDetails.grandTotal = Math.round($scope.purchaseDetails.grandTotal);
 		}
 
 		$scope.purchaseDetails.preBalance = 0;
@@ -151,9 +158,13 @@ angular.module('kamakshiJewellersApp')
 			}
 			$scope.purchaseDetails.subTotal = 0;
 			for (var i = 0; i < $scope.medicineDetailsArr.length; i++) {
-				$scope.purchaseDetails.subTotal = $scope.purchaseDetails.subTotal + $scope.medicineDetailsArr[i].totalAmount;
-				$scope.purchaseDetails.subTotal = parseFloat($scope.purchaseDetails.subTotal);
+				$scope.purchaseDetails.subTotal = parseFloat($scope.purchaseDetails.subTotal.toFixed(2)) + parseFloat($scope.medicineDetailsArr[i].totalAmount.toFixed(2));
+				$scope.purchaseDetails.subTotal = parseFloat($scope.purchaseDetails.subTotal.toFixed(2));
 			}
+
+			$scope.purchaseDetails.grandTotal = parseFloat($scope.purchaseDetails.preBalance.toFixed(2)) + parseFloat($scope.purchaseDetails.subTotal.toFixed(2));
+
+			$scope.purchaseDetails.grandTotal = Math.round($scope.purchaseDetails.grandTotal);
 		}
 
 		$scope.calculateBalance = function (p, gT) {
@@ -224,17 +235,18 @@ angular.module('kamakshiJewellersApp')
 			console.log("purchaseDet", purchaseDet)
 
 			pObj.grandTotal = purchaseDet.subTotal;
+			pObj.prevBalance = purchaseDet.prevBalance;
 
 			angular.forEach(mObj, function (val, key) {
 				console.log("val", val)
 				$http.get('/api/Stocks/?filter[where][medicineId]=' + val.medicineId).then(function (resp) {
 					console.log("Stocks", resp.data);
-					if(resp.data[0].purchaseQuantity == null || resp.data[0].purchaseQuantity == 0){
+					if (resp.data[0].purchaseQuantity == null || resp.data[0].purchaseQuantity == 0) {
 						mObj[key].prevPurchaseQunatity = 0;
-					}else{
+					} else {
 						mObj[key].prevPurchaseQunatity = resp.data[0].purchaseQuantity;
 					}
-					
+
 				})
 			})
 
@@ -268,10 +280,10 @@ angular.module('kamakshiJewellersApp')
 							mObj[i].prevBalance = purchaseDet.prevBalance;
 							mObj[i].medicineId = parseInt(mObj[i].medicineId);
 
-							var quantity = mObj[i].prevPurchaseQunatity + mObj[i].quantity;
+							mObj[i].quantityStock = mObj[i].prevPurchaseQunatity + mObj[i].quantity;
 
 							$http.post('/api/Stocks/update?[where][medicineId]=' + mObj[i].medicineId, {
-								purchaseQuantity: quantity
+								purchaseQuantity: mObj[i].quantityStock
 							}).then(function (resp) {
 								console.log("Stocks", resp.data);
 							})
@@ -286,10 +298,10 @@ angular.module('kamakshiJewellersApp')
 							mObj[i].prevBalance = purchaseDet.prevBalance;
 							mObj[i].medicineId = parseInt(mObj[i].medicineId);
 
-							var quantity = mObj[i].prevPurchaseQunatity + mObj[i].quantity;
+							mObj[i].quantityStock = mObj[i].prevPurchaseQunatity + mObj[i].quantity;
 
 							$http.post('/api/Stocks/update?[where][medicineId]=' + mObj[i].medicineId, {
-								purchaseQuantity: quantity
+								purchaseQuantity: mObj[i].quantityStock
 							}).then(function (resp) {
 								console.log("Stocks", resp.data);
 							})

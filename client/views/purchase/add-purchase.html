@@ -100,13 +100,13 @@
 									<td>
 										<select class="form-control" ng-model="medicineDetails.medicineId" ng-change="getMedicineDetails(medicineDetails.medicineId,medicineDetails)">
 											<option value="" ng-disabled="purchase.supplierId">Please Select Supplier</option>
-                                            <option value="{{medicine.id}}" ng-repeat="medicine in medicines">{{medicine.medicineName}},{{medicine.dosage}}</option>
+                                            <option value="{{medicine.id}}" ng-repeat="medicine in medicinesArr">{{medicine.medicineName}},{{medicine.dosage}}</option>
                                         </select>
 										<input type="hidden" ng-model="medicineDetails.medicineName"/>
 									</td>
 									<td>
 										<input type="number" class="form-control" ng-model="medicineDetails.quantity" />
-										<div class="input-group" ng-if="showIfTablet">
+										<div class="input-group" ng-if="medicineDetails.category == 'tablet' || medicineDetails.category == 'Tablet'">
 											<input type="number" class="form-control" ng-model="medicineDetails.quantityInStrips" />
 											<span class="input-group-addon">In Strips</span>
 										</div>

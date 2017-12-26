@@ -21,6 +21,12 @@
 		"purchaseDate": {
 			"type": "date"
 		},
+		"prevBalance": {
+			"type": "number",
+			"postgresql": {
+				"dataType": "decimal"
+			}
+		},
 		"grandTotal": {
 			"type": "number",
 			"postgresql": {

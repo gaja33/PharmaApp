@@ -12,9 +12,6 @@
 		"medicineId": {
 			"type": "number"
 		},
-		"medicineName": {
-			"type": "string"
-		},
 		"quantity": {
 			"type": "number"
 		},
