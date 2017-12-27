@@ -16,22 +16,31 @@ angular.module('kamakshiJewellersApp')
 		$scope.headerName = "Add";
 
 		$scope.supplier = {};
+    
+        $scope.showAlert = false;
 
 		$scope.supplierSave = function (obj) {
 			console.log("obj", obj)
 			$http.post('/api/suppliers', obj).then(function (resp) {
 				console.log("resp", resp)
 				if (resp.status == 200) {
-					console.log("Saved Succesfully")
+					console.log("Saved Succesfully");
+                    
+                    $scope.message = "Saved Succesfully";
+                    $scope.showAlert = true;
+                    
 					$scope.supplier = {};
 					$scope.Supplier.$setPristine();
 					$scope.Supplier.$setUntouched();
 
-					$scope.cancel();
-					$route.reload();
-					/*$timeout(function () {
-						$location.path('/view-supplier')
-					}, 500)*/
+					$timeout(function () {
+                        $scope.showAlert = false;
+                    }, 1000)
+
+                    $timeout(function () {
+                        $scope.cancel();
+                        $route.reload();
+                    }, 1500)
 
 				}
 			}, function errorCallback(response) {

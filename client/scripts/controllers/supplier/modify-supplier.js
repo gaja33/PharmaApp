@@ -16,6 +16,8 @@ angular.module('kamakshiJewellersApp')
 		$scope.headerName = "Update";
 
 		$scope.supplier = {};
+    
+        $scope.showAlert = false;
 
 		/*var currentId = $routeParams.id;*/
 		$scope.getId = getId;
@@ -29,15 +31,21 @@ angular.module('kamakshiJewellersApp')
 			console.log("obj", obj)
 			$http.put('/api/suppliers', obj).then(function (resp) {
 				if (resp.status == 200) {
+                    $scope.message = "Updated Succesfully";
+                    $scope.showAlert = true;
+                    
 					$scope.supplier = {};
 					$scope.Supplier.$setPristine();
 					$scope.Supplier.$setUntouched();
 
-					$scope.cancel();
-					$route.reload();
-					/*$timeout(function () {
-						$location.path('/view-supplier')
-					}, 500)*/
+					$timeout(function () {
+                        $scope.showAlert = false;
+                    }, 1000)
+
+                    $timeout(function () {
+                        $scope.cancel();
+                        $route.reload();
+                    }, 1500)
 
 				}
 			})

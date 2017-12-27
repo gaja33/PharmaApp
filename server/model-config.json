@@ -78,5 +78,9 @@
   "Stock": {
     "dataSource": "postgres",
     "public": true
+  },
+  "medicine_supplier_mapper": {
+    "dataSource": "postgres",
+    "public": true
   }
 }

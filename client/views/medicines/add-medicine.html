@@ -1,5 +1,7 @@
 <!--<h2 style="margin: 0;padding: 0;">Add Medicine</h2>-->
-
+<div class="alert alert-success" ng-if="showAlert">
+    {{message}}
+</div>
 <div class="box box-primary">
 	<div class="box-header with-border">
 		<h3 class="box-title">Add Medicine</h3>
@@ -23,14 +25,14 @@
 				</select>
 					</div>
 				</div>
-				<div class="col-sm-4">
+				<!--<div class="col-sm-4">
 					<div class="form-group">
 						<label for="supplier">Supplier</label>
 						<select class="form-control col-sm-3" id="category" ng-model="medicine.supplierId">
 							<option value="{{supplier.id}}" ng-repeat="supplier in suppliers">{{supplier.supplierName}}</option>
 						</select>
 					</div>
-				</div>
+				</div>-->
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label for="dosage">Dosage</label>
