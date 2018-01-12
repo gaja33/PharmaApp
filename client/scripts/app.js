@@ -16,6 +16,7 @@ angular
     'ngMessages',
     'ngResource',
     'ngRoute',
+    'ui.select',
     'ngSanitize',
     'ngTouch',
     'angularFileUpload',
