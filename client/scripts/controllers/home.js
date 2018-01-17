@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the jewelleryApp
  */
-angular.module('kamakshiJewellersApp')
+angular.module('siddhiSaiMedApp')
     .controller('HomeCtrl', function ($scope,$http) {
        
     });

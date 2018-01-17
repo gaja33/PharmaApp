@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the jewelleryApp
  */
-angular.module('kamakshiJewellersApp')
+angular.module('siddhiSaiMedApp')
     .controller('LoginCtrl', function ($scope, $state, authService, $location,$rootScope) {
         $scope.showLoding = false;
         $scope.login = function () {

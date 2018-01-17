@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the jewelleryApp
  */
-angular.module('kamakshiJewellersApp')
+angular.module('siddhiSaiMedApp')
 	.controller('ViewSupplierCtrl', function ($scope, $http, $route, $uibModal) {
 		$http.get('/api/suppliers').then(function (resp) {
 			console.log("resp", resp)

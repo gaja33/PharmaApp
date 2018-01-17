@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the jewelleryApp
  */
-angular.module('kamakshiJewellersApp')
+angular.module('siddhiSaiMedApp')
     .controller('ViewSaleCtrl', function ($scope, $http, $timeout, $route, $filter) {
 
         $http.get('/api/sales').then(function (resp) {

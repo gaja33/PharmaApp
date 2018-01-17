@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the jewelleryApp
  */
-angular.module('kamakshiJewellersApp')
+angular.module('siddhiSaiMedApp')
     .controller('ModifyCategoryCtrl', function ($scope, $http, $location, $timeout, $routeParams, getId, $uibModalInstance,$route) {
 
         $scope.Update = true;

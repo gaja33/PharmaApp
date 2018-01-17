@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the jewelleryApp
  */
-angular.module('kamakshiJewellersApp')
+angular.module('siddhiSaiMedApp')
     .controller('AddMedicineCtrl', function ($scope, $rootScope, $http, $location, $timeout, $routeParams, Medicine) {
 
         $scope.Update = false;

@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name kamakshiJewellersApp
+ * @name siddhiSaiMedApp
  * @description
- * # kamakshiJewellersApp
+ * # siddhiSaiMedApp
  *
  * Main module of the application.
  */
 angular
-	.module('kamakshiJewellersApp', [
+	.module('siddhiSaiMedApp', [
     'ngAnimate',
     'ngAria',
     'ngCookies',

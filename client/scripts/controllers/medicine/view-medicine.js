@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the jewelleryApp
  */
-angular.module('kamakshiJewellersApp')
+angular.module('siddhiSaiMedApp')
 	.controller('ViewMedicineCtrl', function ($scope, $http, $route) {
 		$http.get('/api/medicines').then(function (resp) {
 			console.log("resp", resp)

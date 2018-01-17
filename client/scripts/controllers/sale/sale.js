@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the jewelleryApp
  */
-angular.module('kamakshiJewellersApp')
+angular.module('siddhiSaiMedApp')
     .controller('AddSaleCtrl', function ($scope, $http, $timeout, $route, $filter,$interval) {
 
         $scope.sale = {};
