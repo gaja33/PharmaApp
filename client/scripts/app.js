@@ -97,6 +97,10 @@ angular
 				templateUrl: 'views/sale/view-sales.html',
 				controller: 'ViewSaleCtrl'
 			})
+			.when('/view-stocks', {
+				templateUrl: 'views/stocks/view-stocks.html',
+				controller: 'ViewStocksCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

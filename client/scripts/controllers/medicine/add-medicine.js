@@ -55,6 +55,7 @@ angular.module('siddhiSaiMedApp')
                                 stockObj.categoryName = resp.data.categoryName;
                                 stockObj.purchaseQuantity = 0;
                                 stockObj.saleQuantity = 0;
+                                stockObj.availableQuantity = stockObj.purchaseQuantity - stockObj.saleQuantity;
 
                                 $http.post('/api/Stocks', stockObj).then(function (resp) {
                                     console.log("Stocks", resp)
@@ -95,7 +96,8 @@ angular.module('siddhiSaiMedApp')
                                         stockObj.categoryName = resp.data.categoryName;
                                         stockObj.purchaseQuantity = 0;
                                         stockObj.saleQuantity = 0;
-
+                                        stockObj.availableQuantity = stockObj.purchaseQuantity - stockObj.saleQuantity;
+                                        
                                         $http.post('/api/Stocks', stockObj).then(function (resp) {
                                             console.log("Stocks", resp)
                                         })
