@@ -101,10 +101,17 @@
                             <tbody>
                                 <tr ng-repeat="medicineDetails in medicineDetailsArr track by $index">
                                     <td>
-                                        <select class="form-control" ng-model="medicineDetails.medicineId" ng-change="getMedicineDetails(medicineDetails.medicineId,medicineDetails)">
+                                        <!--<select class="form-control" ng-model="medicineDetails.medicineId" ng-change="getMedicineDetails(medicineDetails.medicineId,medicineDetails)">
                                             <option value="">Please Select Supplier</option>
                                             <option value="{{medicine.id}}" ng-repeat="medicine in medicinesArr">{{medicine.medicineName}},{{medicine.dosage}}</option>
-                                        </select>
+                                        </select>-->
+                                        <ui-select ng-model="medicineDetails.medicineId" theme="select2" style="min-width:150px;" title="Choose a Medicine"ng-change="getMedicineDetails(medicineDetails.medicineId,medicineDetails)">
+                                            <ui-select-match placeholder="Select a Medicine">{{$select.selected.medicineName}}</ui-select-match>
+                                            <ui-select-choices repeat="medicine.id as medicine in medicinesArr | propsFilter: {medicineName: $select.search, dosage: $select.search}">
+                                                <div ng-bind-html="medicine.medicineName | highlight: $select.search"></div>
+                                                <small>Dosage: <span ng-bind-html="''+medicine.dosage | highlight: $select.search"></span></small>
+                                            </ui-select-choices>
+                                        </ui-select>
                                         <input type="hidden" ng-model="medicineDetails.medicineName" />
                                     </td>
                                     <td>

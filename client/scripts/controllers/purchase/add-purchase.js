@@ -101,6 +101,11 @@ angular.module('siddhiSaiMedApp')
             $http.get('/api/suppliers/' + id).then(function (resp) {
                 console.log("suppliers", resp.data);
                 $scope.purchase.supplierName = resp.data.supplierName;
+
+                $http.get('/api/purchases?filter[where][supplierId]=' + id+'&filter[order]=purchaseDate%20DESC&filter[limit]=1' ).then(function (resp) {
+                    console.log("suppliersId", resp.data);      
+                    $scope.purchaseDetails.preBalance = parseInt(resp.data[0].prevBalance);
+                })
             })
         }
 
@@ -113,6 +118,7 @@ angular.module('siddhiSaiMedApp')
 
         $scope.getMedicineDetails = function (id, medDet) {
             console.log("id", id);
+            console.log("medDet", medDet);
             $http.get('/api/medicines?filter[where][id]=' + id).then(function (resp) {
                 console.log("medicine", resp.data);
                 if (resp.data.length != 0) {
@@ -147,7 +153,7 @@ angular.module('siddhiSaiMedApp')
             $scope.purchaseDetails.grandTotal = Math.round($scope.purchaseDetails.grandTotal);
         }
 
-        $scope.purchaseDetails.preBalance = 0;
+        //$scope.purchaseDetails.preBalance = 0;
 
         $scope.addItem = function () {
             $scope.medicineDetailsArr.push({
@@ -374,8 +380,8 @@ angular.module('siddhiSaiMedApp')
 
                         $scope.message = "PurchaseDetails Saved Succesfully";
                         $scope.showAlert = true;
-                        
-                        
+
+
                         $timeout(function () {
                             $scope.showAlert = false;
                         }, 500)
@@ -387,7 +393,7 @@ angular.module('siddhiSaiMedApp')
             $timeout(function () {
                 $http.post('/api/medicine_supplier_mappers', supMedIdMapArr).then(function (resp) {
                     console.log("MapperDetails", resp.data)
-                    
+
                     if (resp.status == 200) {
 
                         $scope.message = "Med Sup Id's Saved Succesfully";
@@ -396,7 +402,7 @@ angular.module('siddhiSaiMedApp')
                         $timeout(function () {
                             $scope.showAlert = false;
                         }, 500)
-                        
+
                         $route.reload();
 
                     }
@@ -451,4 +457,36 @@ angular.module('siddhiSaiMedApp')
         }
 
 
-    });
+    })
+
+.filter('propsFilter', function() {
+  return function(items, props) {
+    var out = [];
+
+    if (angular.isArray(items)) {
+      var keys = Object.keys(props);
+
+      items.forEach(function(item) {
+        var itemMatches = false;
+
+        for (var i = 0; i < keys.length; i++) {
+          var prop = keys[i];
+          var text = props[prop].toLowerCase();
+          if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+            itemMatches = true;
+            break;
+          }
+        }
+
+        if (itemMatches) {
+          out.push(item);
+        }
+      });
+    } else {
+      // Let the output be the input untouched
+      out = items;
+    }
+
+    return out;
+  };
+});
